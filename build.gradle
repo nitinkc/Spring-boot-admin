@@ -1,0 +1,38 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.12'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+ext {
+    set('springCloudVersion', "2020.0.4")
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri('http://repo.maven.apache.org/maven2')
+    }
+}
+
+dependencies {
+// https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-server
+    implementation group: 'de.codecentric', name: 'spring-boot-admin-server', version: '2.6.2'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+group = 'com.microservices'
+version = '0.0.1-SNAPSHOT'
+description = 'admin-server'
+sourceCompatibility = '11'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
